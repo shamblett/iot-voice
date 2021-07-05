@@ -1,36 +1,30 @@
 /*
- * Package : iot_home_sensors
+ * Package : iot_voice_sensors
  * Author : S. Hamblett <steve.hamblett@linux.com>
- * Date   : 29/09/2017
+ * Date   : 05/07/2021
  * Copyright :  S.Hamblett
  */
 
-part of iot_home_sensors;
+part of iot_voice;
 
-/// A dummy sensor class, this class generates a stream of integer values generated
-/// randomly between the range of 0..40. A base of 64 is then added
-/// to make the generated value printable. A value is generated every sampleTime seconds.
-class DummySensor extends ISensor {
+/// The platform sensor class, this class generates a JSON formatted text string
+/// representing the state of the devices on the platform.
+class IotVoicePlatformSensor extends IotVoiceISensor {
   /// Construction
-  DummySensor([sampleTime = ISensor.defaultSampleTime]) {
-    type = SensorTypes.dummy;
+  IotVoicePlatformSensor([sampleTime = IotVoiceISensor.defaultSampleTime]) {
+    type = SensorTypes.platform;
     value = 0;
     state = SensorState.stopped;
     this.sampleTime = sampleTime;
-    _random = Random();
   }
 
   /// The value generation period timer and its callback
   late Timer _timer;
 
   void _timerCallBack(Timer timer) {
-    _generateValue();
     final data = getSensorData();
     _values.add(data);
   }
-
-  /// The random number generator
-  late Random _random;
 
   /// Initialiser
   @override
@@ -45,7 +39,6 @@ class DummySensor extends ISensor {
     _timer = Timer.periodic(Duration(seconds: sampleTime), _timerCallBack);
 
     /// Generate an initial value
-    _generateValue();
     final data = getSensorData();
     _values.add(data);
     state = SensorState.started;
@@ -57,12 +50,5 @@ class DummySensor extends ISensor {
     _timer.cancel();
     state = SensorState.stopped;
     _values.close();
-  }
-
-  /// Generate a random value at this time
-  void _generateValue() {
-    value = _random.nextInt(40);
-    value = value + 0x40;
-    at = DateTime.now();
   }
 }

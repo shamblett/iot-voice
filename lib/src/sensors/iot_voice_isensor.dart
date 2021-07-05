@@ -1,20 +1,20 @@
 /*
- * Package : iot_home_sensors
+ * Package : iot_voice
  * Author : S. Hamblett <steve.hamblett@linux.com>
- * Date   : 29/09/2017
+ * Date   : 05/07/2021
  * Copyright :  S.Hamblett
  */
 
-part of iot_home_sensors;
+part of iot_voice;
 
 /// Sensor types
-enum SensorTypes { none, dummy, temperature, light, pir }
+enum SensorTypes { none, platform }
 
 /// Sensor state
 enum SensorState { none, started, stopped }
 
 /// Sensor data packet
-class SensorData {
+class IotVoiceSensorData {
   SensorTypes? type;
   dynamic value;
   late int at;
@@ -31,7 +31,7 @@ class SensorData {
 }
 
 /// Interface for all the sensors
-abstract class ISensor {
+abstract class IotVoiceISensor {
   static const int defaultSampleTime = 10;
 
   /// The type of the sensor
@@ -50,10 +50,10 @@ abstract class ISensor {
   late int sampleTime;
 
   /// The stream of values emitted by the sensor
-  final StreamController<SensorData> _values =
-      StreamController<SensorData>.broadcast();
+  final StreamController<IotVoiceSensorData> _values =
+      StreamController<IotVoiceSensorData>.broadcast();
 
-  Stream<SensorData> get values => _values.stream;
+  Stream<IotVoiceSensorData> get values => _values.stream;
 
   /// Initialiser
   void initialise();
@@ -65,8 +65,8 @@ abstract class ISensor {
   void stop();
 
   /// Get the latest sensor data as a message
-  SensorData getSensorData() {
-    final message = SensorData();
+  IotVoiceSensorData getSensorData() {
+    final message = IotVoiceSensorData();
     message.value = value;
     message.at = at.millisecondsSinceEpoch;
     message.type = type;

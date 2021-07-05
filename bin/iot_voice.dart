@@ -1,7 +1,7 @@
 /*
- * Project : iot-home
+ * Project : iot-voice
  * Author : S. Hamblett <steve.hamblett@linux.com>
- * Date   : 29/09/2017
+ * Date   : 05/07/2021
  * Copyright :  S.Hamblett
  */
 
@@ -13,18 +13,18 @@ import 'package:intl/intl.dart';
 
 Future main(List<String> args) async {
   var mqttLogging = false;
-  var sampleRate = ISensor.defaultSampleTime;
+  var sampleRate = IotVoiceISensor.defaultSampleTime;
 
   /// Command line parameters
   final parser = ArgParser();
   parser.addFlag('log',
       abbr: 'l', defaultsTo: false, callback: (log) => mqttLogging = log);
   parser.addOption('sampleRate',
-      abbr: 's', defaultsTo: ISensor.defaultSampleTime.toString(),
+      abbr: 's', defaultsTo: IotVoiceISensor.defaultSampleTime.toString(),
       callback: (sampleRateOption) {
     sampleRate = int.parse(sampleRateOption!);
     if (sampleRate <= 0) {
-      sampleRate = ISensor.defaultSampleTime;
+      sampleRate = IotVoiceISensor.defaultSampleTime;
     }
   });
 
@@ -32,15 +32,15 @@ Future main(List<String> args) async {
 
   /// Announce and start
   print(
-      'Welcome to iot-home for device ${Secrets.dummyDeviceId} with a sample rate of $sampleRate seconds');
+      'Welcome to iot-home for device ${IotVoiceSecrets.dummyDeviceId} with a sample rate of $sampleRate seconds');
 
   /// Create our sensor and start it
-  final sensor = DummySensor(sampleRate);
+  final sensor = IotVoicePlatformSensor(sampleRate);
   sensor.initialise();
   sensor.start();
 
   /// Create our MQTT bridge and initialise it
-  final bridge = MqttBridge(Secrets.dummyDeviceId);
+  final bridge = IotVoiceMqttBridge(IotVoiceSecrets.dummyDeviceId);
   bridge.logging = mqttLogging;
   bridge.initialise();
 
@@ -49,18 +49,18 @@ Future main(List<String> args) async {
 
   /// Listen for values
   final format = DateFormat('y-MM-dd-HH:mm:ss');
-  await for (SensorData data in sensor.values) {
+  await for (IotVoiceSensorData data in sensor.values) {
     final dateString =
         format.format(DateTime.fromMillisecondsSinceEpoch(data.at));
-    print('Dummy sensor value is ${data.value} at time $dateString');
+    print('Platform sensor value is ${data.value} at time $dateString');
     // Dont publish unless the bridge is ready
     if (bridge.initialised) {
       bridge.update(data);
     } else {
-      print('iot-home: not updated bridge not ready');
+      print('iot-voice: not updated bridge not ready');
     }
   }
 
-  print('Goodbye from iot-home');
+  print('Goodbye from iot-voice');
   exit(0);
 }

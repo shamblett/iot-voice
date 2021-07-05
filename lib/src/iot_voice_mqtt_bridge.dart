@@ -1,16 +1,16 @@
 /*
- * Package : iot_home_sensors
+ * Package : iot_voice
  * Author : S. Hamblett <steve.hamblett@linux.com>
- * Date   : 29/09/2017
+ * Date   : 05/07/2021
  * Copyright :  S.Hamblett
  */
 
-part of iot_home_sensors;
+part of iot_voice;
 
 /// The interface class to Googles's Iot-Core MQTT bridge
-class MqttBridge {
+class IotVoiceMqttBridge {
   /// Construction
-  MqttBridge(this.deviceId);
+  IotVoiceMqttBridge(this.deviceId);
 
   /// Device Id
   String deviceId;
@@ -68,7 +68,7 @@ class MqttBridge {
   }
 
   /// Update an integer value
-  void update(SensorData data) {
+  void update(IotVoiceSensorData data) {
     final buff = _sensorDataBuffer(data);
     client.publishMessage(getTelemetryTopic(), MqttQos.atMostOnce, buff);
   }
@@ -76,11 +76,11 @@ class MqttBridge {
   /// Get the client id for the sensor
   String getClientId() {
     return 'projects/' +
-        Secrets.projectId +
+        IotVoiceSecrets.projectId +
         '/locations/' +
-        Secrets.region +
+        IotVoiceSecrets.region +
         '/registries/' +
-        Secrets.registry +
+        IotVoiceSecrets.registry +
         '/devices/' +
         deviceId;
   }
@@ -97,13 +97,13 @@ class MqttBridge {
         ((DateTime.now().add(Duration(hours: 24)).millisecondsSinceEpoch) /
                 1000)
             .round();
-    final token =
-        jwt.Jwt.RS256({'iat': iat, 'exp': exp, 'aud': Secrets.projectId});
+    final token = jwt.Jwt.RS256(
+        {'iat': iat, 'exp': exp, 'aud': IotVoiceSecrets.projectId});
     final enc = await encoder.convert(token);
     return enc.toString();
   }
 
-  typed.Uint8Buffer _sensorDataBuffer(SensorData data) {
+  typed.Uint8Buffer _sensorDataBuffer(IotVoiceSensorData data) {
     return typed.Uint8Buffer()..addAll(data.toString().codeUnits.toList());
   }
 }
