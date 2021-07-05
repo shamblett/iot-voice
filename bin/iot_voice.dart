@@ -1,13 +1,13 @@
 /*
  * Project : iot-home
  * Author : S. Hamblett <steve.hamblett@linux.com>
- * Date   : 04/04/2018
+ * Date   : 29/09/2017
  * Copyright :  S.Hamblett
  */
 
 import 'dart:io';
 import 'dart:async';
-import 'package:iot_home/iot_home_sensors.dart';
+import 'package:iot_voice/iot_voice.dart';
 import 'package:args/args.dart';
 import 'package:intl/intl.dart';
 
@@ -32,15 +32,15 @@ Future main(List<String> args) async {
 
   /// Announce and start
   print(
-      'Welcome to iot-home for device ${Secrets.lightDeviceId} with a sample rate of $sampleRate seconds');
+      'Welcome to iot-home for device ${Secrets.dummyDeviceId} with a sample rate of $sampleRate seconds');
 
   /// Create our sensor and start it
-  final sensor = LightSensor(sampleRate);
+  final sensor = DummySensor(sampleRate);
   sensor.initialise();
   sensor.start();
 
   /// Create our MQTT bridge and initialise it
-  final bridge = MqttBridge(Secrets.lightDeviceId);
+  final bridge = MqttBridge(Secrets.dummyDeviceId);
   bridge.logging = mqttLogging;
   bridge.initialise();
 
@@ -52,8 +52,7 @@ Future main(List<String> args) async {
   await for (SensorData data in sensor.values) {
     final dateString =
         format.format(DateTime.fromMillisecondsSinceEpoch(data.at));
-    print(
-        '${Secrets.lightDeviceId} value is ${data.value} at time $dateString');
+    print('Dummy sensor value is ${data.value} at time $dateString');
     // Dont publish unless the bridge is ready
     if (bridge.initialised) {
       bridge.update(data);
