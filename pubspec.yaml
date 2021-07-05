@@ -2,21 +2,19 @@ name: iot_voice
 description: A little iot-core project using MQTT to provide data for the IOT Voice project.
 version: 0.1.0
 author: Steve Hamblett <steve.hamblett@linux.com>
-homepage: https://github.com/shamblett/iot-home
+homepage: https://github.com/shamblett/iot-voice
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
-  mqtt_client: '^9.0.0'
+  mqtt_client: '^9.3.2'
   just_jwt:
     git: https://github.com/shamblett/JustJWT.git
-  mraa: '^2.0.0'
-  args: '^2.0.0'
+  args: '^2.1.1'
   intl: '^0.17.0'
-  grove: '^3.0.0'
 
 dev_dependencies:
-  test: '^1.16.8'
+  test: '^1.17.9'
 
 

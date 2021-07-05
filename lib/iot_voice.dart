@@ -5,7 +5,7 @@
  * Copyright :  S.Hamblett
  */
 
-library iot_home_sensors;
+library iot_voice;
 
 import 'dart:async';
 import 'dart:ffi' as ffi;
@@ -20,16 +20,11 @@ import 'package:typed_data/typed_data.dart' as typed;
 import 'package:mraa/mraa.dart' as mraa;
 import 'package:grove/grove.dart' as sensor;
 
-part 'package:iot_home/src/sensors/iot_voice_isensor.dart';
+part 'src/sensors/iot_voice_isensor.dart';
 
-part 'package:iot_home/src/sensors/iot_voice_platform_sensor.dart';
-
-part 'package:iot_home/src/sensors/temperature_sensor.dart';
-
-part 'package:iot_home/src/sensors/light_sensor.dart';
+part 'src/sensors/iot_voice_platform_sensor.dart';
 
 part 'src/iot_voice_mqtt_bridge.dart';
 
 part 'src/secret/iot_voice_secrets.dart';
 
-part 'src/execute_sensor_script.dart';
