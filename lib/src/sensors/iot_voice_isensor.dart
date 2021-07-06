@@ -15,18 +15,14 @@ enum SensorState { none, started, stopped }
 
 /// Sensor data packet
 class IotVoiceSensorData {
-  SensorTypes? type;
-  dynamic value;
-  late int at;
+  SensorTypes? type = SensorTypes.none;
+  String status = '';
+  int at = 0;
 
   /// toString, remove the enum type from SensorTypes
   @override
   String toString() {
-    return type.toString().split('.').toList()[1] +
-        ':' +
-        value.toString() +
-        ':' +
-        at.toString();
+    return status;
   }
 }
 
@@ -40,8 +36,8 @@ abstract class IotVoiceISensor {
   /// The state the sensor is in
   SensorState state = SensorState.none;
 
-  /// The value of the sensor
-  dynamic value;
+  /// The status of the sensor
+  String status = '';
 
   /// The time the value was set(acquired)
   late DateTime at;
@@ -65,11 +61,5 @@ abstract class IotVoiceISensor {
   void stop();
 
   /// Get the latest sensor data as a message
-  IotVoiceSensorData getSensorData() {
-    final message = IotVoiceSensorData();
-    message.value = value;
-    message.at = at.millisecondsSinceEpoch;
-    message.type = type;
-    return message;
-  }
+  IotVoiceSensorData getSensorData();
 }

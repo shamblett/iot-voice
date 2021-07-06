@@ -13,10 +13,14 @@ class IotVoicePlatformSensor extends IotVoiceISensor {
   /// Construction
   IotVoicePlatformSensor([sampleTime = IotVoiceISensor.defaultSampleTime]) {
     type = SensorTypes.platform;
-    value = 0;
+    status = '';
     state = SensorState.stopped;
     this.sampleTime = sampleTime;
+    statusData = File(IotVoiceSecrets.statusFilePath);
   }
+
+  /// The status data json file
+  late File statusData;
 
   /// The value generation period timer and its callback
   late Timer _timer;
@@ -50,5 +54,14 @@ class IotVoicePlatformSensor extends IotVoiceISensor {
     _timer.cancel();
     state = SensorState.stopped;
     _values.close();
+  }
+
+  @override
+  IotVoiceSensorData getSensorData() {
+    final message = IotVoiceSensorData();
+    message.status = statusData.readAsStringSync();
+    message.at = at.millisecondsSinceEpoch;
+    message.type = type;
+    return message;
   }
 }

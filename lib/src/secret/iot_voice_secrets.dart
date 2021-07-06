@@ -14,4 +14,6 @@ class IotVoiceSecrets {
   static const String registry = 'voice-sensors';
 
   static const String platformDeviceId = 'platform-sensor';
+  static const String statusFilePath =
+      '/home/steve/development/google/dart/projects/iot-voice/platform/status.json';
 }

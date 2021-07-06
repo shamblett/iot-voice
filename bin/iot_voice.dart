@@ -32,7 +32,7 @@ Future main(List<String> args) async {
 
   /// Announce and start
   print(
-      'Welcome to iot-voice for device ${IotVoiceSecrets.dummyDeviceId} with a sample rate of $sampleRate seconds');
+      'Welcome to iot-voice for device ${IotVoiceSecrets.platformDeviceId} with a sample rate of $sampleRate seconds');
 
   /// Create our sensor and start it
   final sensor = IotVoicePlatformSensor(sampleRate);
@@ -40,7 +40,7 @@ Future main(List<String> args) async {
   sensor.start();
 
   /// Create our MQTT bridge and initialise it
-  final bridge = IotVoiceMqttBridge(IotVoiceSecrets.dummyDeviceId);
+  final bridge = IotVoiceMqttBridge(IotVoiceSecrets.platformDeviceId);
   bridge.logging = mqttLogging;
   bridge.initialise();
 
@@ -52,7 +52,7 @@ Future main(List<String> args) async {
   await for (IotVoiceSensorData data in sensor.values) {
     final dateString =
         format.format(DateTime.fromMillisecondsSinceEpoch(data.at));
-    print('Platform sensor value is ${data.value} at time $dateString');
+    print('Platform sensor value is ${data.status} at time $dateString');
     // Dont publish unless the bridge is ready
     if (bridge.initialised) {
       bridge.update(data);
