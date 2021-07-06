@@ -1,0 +1,18 @@
+{
+  "Id": "4300046B-5A48-4780-A235-FD9ECB799C5",
+  "Description": "A yacht named Daisy",
+  "Bow": [
+    {
+      "Door": "Open",
+      "Water Level": "80"
+    }
+  ],
+  "Stern": [
+    {
+      "Door": "Closed",
+      "Water Level": "70"
+    }
+  ],
+  "Motor": "Idle",
+  "Battery": "Charged"
+}

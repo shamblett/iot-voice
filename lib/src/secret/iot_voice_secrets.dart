@@ -11,7 +11,7 @@ part of iot_voice;
 class IotVoiceSecrets {
   static const String projectId = 'warm-actor-356';
   static const String region = 'europe-west1';
-  static const String registry = 'home-sensors';
+  static const String registry = 'voice-sensors';
 
-  static const String dummyDeviceId = 'dummy-sensor';
+  static const String platformDeviceId = 'platform-sensor';
 }

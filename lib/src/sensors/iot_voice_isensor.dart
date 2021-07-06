@@ -32,7 +32,7 @@ class IotVoiceSensorData {
 
 /// Interface for all the sensors
 abstract class IotVoiceISensor {
-  static const int defaultSampleTime = 10;
+  static const int defaultSampleTime = 10; // seconds
 
   /// The type of the sensor
   SensorTypes type = SensorTypes.none;

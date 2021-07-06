@@ -32,7 +32,7 @@ Future main(List<String> args) async {
 
   /// Announce and start
   print(
-      'Welcome to iot-home for device ${IotVoiceSecrets.dummyDeviceId} with a sample rate of $sampleRate seconds');
+      'Welcome to iot-voice for device ${IotVoiceSecrets.dummyDeviceId} with a sample rate of $sampleRate seconds');
 
   /// Create our sensor and start it
   final sensor = IotVoicePlatformSensor(sampleRate);
