@@ -10,10 +10,10 @@ part of iot_voice;
 /// Project/ Device Id's etc
 class IotVoiceSecrets {
   static const String projectId = 'warm-actor-356';
-  static const String region = 'europe-west1';
-  static const String registry = 'voice-sensors';
+  static const String region = 'us-central1';
+  static const String registry = 'iot-voice';
 
-  static const String platformDeviceId = 'platform-sensor';
+  static const String platformDeviceId = 'platform-status';
   static const String statusFilePath =
       '/home/steve/development/google/dart/projects/iot-voice/platform/status.json';
 }

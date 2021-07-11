@@ -40,7 +40,7 @@ class IotVoiceMqttBridge {
   /// Initialise and connect to the Mqtt bridge
   void initialise() {
     // Initialize the token signers, in our case just RS256
-    final sensorPkFilename = deviceId + '-pk.key';
+    final sensorPkFilename = 'iot_voice_' + deviceId + '_pk.key';
     final pkPath =
         path.join(path.current, 'lib', 'src', 'secret', sensorPkFilename);
     final pkFile = File(pkPath);
