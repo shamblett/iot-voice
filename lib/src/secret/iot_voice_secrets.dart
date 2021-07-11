@@ -15,5 +15,5 @@ class IotVoiceSecrets {
 
   static const String platformDeviceId = 'platform-status';
   static const String statusFilePath =
-      '/home/steve/development/google/dart/projects/iot-voice/platform/status.json';
+      '/home/steve/Development/google/dart/projects/iot-voice/platform/status.json';
 }

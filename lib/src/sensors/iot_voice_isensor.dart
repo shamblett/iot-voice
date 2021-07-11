@@ -40,7 +40,7 @@ abstract class IotVoiceISensor {
   String status = '';
 
   /// The time the value was set(acquired)
-  late DateTime at;
+  late DateTime at = DateTime.now();
 
   /// Time between sensor samples in seconds.
   late int sampleTime;
