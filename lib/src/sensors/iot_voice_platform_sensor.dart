@@ -22,11 +22,12 @@ class IotVoicePlatformSensor extends IotVoiceISensor {
   /// The status data json file
   late File statusData;
 
-  /// The value generation period timer and its callback
+  /// The status generation period timer and its callback
   late Timer _timer;
 
   void _timerCallBack(Timer timer) {
     final data = getSensorData();
+    at = DateTime.now();
     _values.add(data);
   }
 
@@ -45,6 +46,7 @@ class IotVoicePlatformSensor extends IotVoiceISensor {
     /// Generate an initial value
     final data = getSensorData();
     _values.add(data);
+    at = DateTime.now();
     state = SensorState.started;
   }
 
