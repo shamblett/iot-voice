@@ -22,7 +22,7 @@ class IotVoiceSensorData {
   /// toString, remove the enum type from SensorTypes
   @override
   String toString() {
-    return "${at.toString()}:'$status'";
+    return '${at.toString()}:$status';
   }
 }
 
