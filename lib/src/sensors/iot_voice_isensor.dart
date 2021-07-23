@@ -22,8 +22,7 @@ class IotVoiceSensorData {
   /// toString, remove the enum type from SensorTypes
   @override
   String toString() {
-    final encoded = utf8.encode(status);
-    return '${at.toString()}:$encoded';
+    return "${at.toString()}:'$status'";
   }
 }
 
