@@ -48,9 +48,9 @@ int main() {
     sleep(const Duration(milliseconds: 500));
   }
 
-  print('Pressing the switch will now light the LED, you have 10 seconds');
+  print('Pressing the switch will now light the LED, you have 20 seconds');
   var stop = 0;
-  while (stop < 200) {
+  while (stop < 400) {
     var switchValue = mraa.gpio.read(switchContext);
     if (switchValue == 1) {
       mraa.gpio.write(ledContext, 0);
