@@ -48,9 +48,9 @@ int main() {
     sleep(const Duration(milliseconds: 500));
   }
 
-  print('Pressing the switch will now light the LED, press X to exit');
-  var stop = false;
-  while (!stop) {
+  print('Pressing the switch will now light the LED, you have 10 seconds');
+  var stop = 0;
+  while (stop < 200) {
     var switchValue = mraa.gpio.read(switchContext);
     if (switchValue == 1) {
       mraa.gpio.write(ledContext, 0);
@@ -58,10 +58,7 @@ int main() {
       mraa.gpio.write(ledContext, 1);
     }
     sleep(const Duration(milliseconds: 50));
-    final char = String.fromCharCode(stdin.readByteSync());
-    if (char.toUpperCase() == 'X') {
-      stop = true;
-    }
+    stop++;
   }
 
   print('GPIO test complete');
