@@ -34,17 +34,23 @@ int main() {
   /// The LED initialisation
   print('Initialising LED');
   final ledContext = mraa.gpio.initialise(ledGPIOPin);
+  mraa.gpio
+      .direction(ledContext, MraaGpioDirection.out); // LED is an 'out' device
 
   /// The switch initialisation
   print('Initialising switch');
   final switchContext = mraa.gpio.initialise(switchGPIOPin);
+  mraa.gpio.direction(
+      switchContext, MraaGpioDirection.inn); // Switch is an 'in' device
 
   print('Flash the LED for 10 seconds');
   // Note that on my board 0 turns the LED on, 1 Off
   for (var i = 0; i <= 9; i++) {
     mraa.gpio.write(ledContext, 0);
+    print('LED on');
     sleep(const Duration(milliseconds: 500));
     mraa.gpio.write(ledContext, 1);
+    print('LED off');
     sleep(const Duration(milliseconds: 500));
   }
 
