@@ -5,11 +5,10 @@
 * Copyright :  S.Hamblett
 */
 
-
 /// Configuration for the IOT Voice GPIO example. Update these as needed.
 
 // Mraa library
-const mraaLibraryPath = 'libmraa.so.2.2';
+const mraaLibraryPath = 'libmraa.so.2.2.0';
 
 // Mraa configuration.
 const noJsonLoading = true;
