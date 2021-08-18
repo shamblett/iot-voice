@@ -22,7 +22,7 @@ int main() {
       ..initialise();
   } else {
     print('Using local supplied version of mraa library');
-    final mraaPath = path.join(path.current, 'bin', 'mraa', mraaLibraryPath);
+    final mraaPath = path.join(path.current, 'bin', 'mraa', mraaLibrary);
     mraa = Mraa.fromLib(mraaPath)
       ..noJsonLoading = noJsonLoading
       ..useGrovePi = useGrovePi

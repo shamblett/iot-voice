@@ -11,7 +11,7 @@
 const useDistro = false;
 
 // Mraa library if using local version
-const mraaLibraryPath = 'libmraa.so.2.2.0';
+const mraaLibrary = 'libmraa.so.2.2.0';
 
 // Mraa configuration.
 const noJsonLoading = true;
