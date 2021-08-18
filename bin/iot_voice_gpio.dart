@@ -12,12 +12,22 @@ import 'iot_voice_gpio_config.dart';
 
 /// Simple GPIO example on the Raspberry pi for IOT Voice.
 int main() {
-  final mraaPath = path.join(path.current, 'bin', 'mraa', mraaLibraryPath);
-
-  final mraa = Mraa.fromLib(mraaPath)
-    ..noJsonLoading = noJsonLoading
-    ..useGrovePi = useGrovePi
-    ..initialise();
+  var mraa;
+  // Check for local or distro mraa library
+  if (useDistro) {
+    print('Using distro supplied version of mraa library');
+    mraa = Mraa()
+      ..noJsonLoading = noJsonLoading
+      ..useGrovePi = useGrovePi
+      ..initialise();
+  } else {
+    print('Using local supplied version of mraa library');
+    final mraaPath = path.join(path.current, 'bin', 'mraa', mraaLibraryPath);
+    mraa = Mraa.fromLib(mraaPath)
+      ..noJsonLoading = noJsonLoading
+      ..useGrovePi = useGrovePi
+      ..initialise();
+  }
 
   // Version
   final mraaVersion = mraa.common.version();

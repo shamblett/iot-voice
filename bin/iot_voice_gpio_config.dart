@@ -7,7 +7,10 @@
 
 /// Configuration for the IOT Voice GPIO example. Update these as needed.
 
-// Mraa library
+// Use the platform(distro supplied) or local version of MRAA
+const useDistro = false;
+
+// Mraa library if using local version
 const mraaLibraryPath = 'libmraa.so.2.2.0';
 
 // Mraa configuration.
