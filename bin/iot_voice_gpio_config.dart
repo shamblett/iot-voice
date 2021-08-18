@@ -8,8 +8,8 @@
 
 /// Configuration for the IOT Voice GPIO example. Update these as needed.
 
-// Mraa library path.
-const mraaLibraryPath = '/home/ubuntu/Development/mraa/build/src/libmraa.so.2';
+// Mraa library
+const mraaLibraryPath = 'libmraa.so.2.2';
 
 // Mraa configuration.
 const noJsonLoading = true;
